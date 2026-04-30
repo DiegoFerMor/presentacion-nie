@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State of the Art in IgA Nephropathy | Hygieia Hub</title>
+    
+    <!-- Fonts: Manrope (Display) & Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons: Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0055D7",    // Deep Blue
+                        brandPrimary: "#0055D7",
+                        secondary: "#00B5DA",  // Light Blue / Cyan
+                        accent: "#d4af37",      // Oro Mate
+                        surface: "#f2f8ff",    // Azul pastel muy claro
+                        "surface-low": "#e5f0fa", // Azul pastel medio
+                        "surface-lowest": "#ffffff", // Blanco puro
+                        "on-surface": "#0a192f", // Azul muy oscuro casi negro
+                        "outline": "#64829e",    // Gris azulado
+                    },
+                    fontFamily: {
+                        headline: ["Manrope", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                    },
+                    letterSpacing: {
+                        ultra: "-0.02em",
+                        stately: "0.2em",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3, h4 { font-family: 'Manrope', sans-serif; }
+        
+        .hero-gradient { 
+            background: linear-gradient(135deg, #002b6b 0%, #0055D7 100%); 
+        }
+        
+        .glass-nav { 
+            background: rgba(255, 255, 255, 0.90); 
+            backdrop-filter: blur(16px); 
+        }
+        
+        .reveal { transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; transform: translateY(20px); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.6s ease-out; }
+        .accordion-item.active .accordion-content { max-height: 3000px; }
+        .accordion-item.active .accordion-icon { transform: rotate(180deg); }
+        
+        .text-balance { text-wrap: balance; }
+        
+        /* Estilos de Chat: Forzado de color principal y secundario */
+        :root {
+            --chat--color--primary: #0055D7 !important; 
+            --chat--color--primary-shade-50: #0044ab !important; 
+            --chat--color--primary-shade-100: #003380 !important; 
+            
+            --chat--color--secondary: #00B5DA !important; 
+            --chat--color--secondary-shade-50: #0091ae !important; 
+            --chat--color--secondary-shade-100: #006d83 !important; 
+            
+            --chat--toggle--background: #00B5DA !important; 
+            --chat--toggle--background-hover: #0091ae !important; 
+            --chat--toggle--background-active: #006d83 !important; 
+            --chat--toggle--color: #ffffff !important; 
+        }
+
+        [class*="chat-toggle"],
+        [class*="chat-toggle"]:hover,
+        [class*="chat-toggle"]:active,
+        [class*="chat-toggle"]:focus {
+            background-color: #00B5DA !important;
+            border-color: #00B5DA !important;
+            color: #ffffff !important;
+        }
+
+        ::selection { background-color: #00B5DA; color: #ffffff; }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+</head>
+<body class="bg-surface text-on-surface">
+
+    <!-- Header / Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-nav border-b border-surface-low shadow-sm transition-all">
+        <div class="max-w-7xl mx-auto px-6 h-32 lg:h-36 flex justify-between items-center transition-all">
+            <!-- Brand: Logo Nephro -->
+            <div class="flex items-center">
+                <img src="./logos/logo_nephro.png" alt="State of the Art IgA Nephropathy" class="h-32 lg:h-40 w-auto drop-shadow-sm transition-all" onerror="this.src='https://placehold.co/600x150/transparent/0055D7?text=State+of+the+Art+IgAN'">
+            </div>
+            
+            <!-- Links -->
+            <div class="hidden lg:flex items-center gap-10">
+                <a href="#proposito" class="text-sm font-semibold text-primary hover:text-secondary transition-colors uppercase tracking-widest text-[11px]">Justificación</a>
+                <a href="#metodologia" class="text-sm font-semibold text-primary hover:text-secondary transition-colors uppercase tracking-widest text-[11px]">Metodología</a>
+                <a href="#programa" class="text-sm font-semibold text-primary hover:text-secondary transition-colors uppercase tracking-widest text-[11px]">Módulos</a>
+                <a href="#publico" class="text-sm font-semibold text-primary hover:text-secondary transition-colors uppercase tracking-widest text-[11px]">Público</a>
+                <a href="#avales" class="text-sm font-semibold text-primary hover:text-secondary transition-colors uppercase tracking-widest text-[11px]">Docentes</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <header class="hero-gradient relative min-h-screen flex items-center pt-24 overflow-hidden text-white">
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 relative z-10 w-full">
+                <div class="lg:col-span-8 space-y-8 reveal">
+                    <div class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
+                        <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-white/90">Edición 2027</span>
+                    </div>
+                    
+                    <h1 class="flex flex-col gap-2 md:gap-4">
+                        <span class="text-xl md:text-2xl lg:text-3xl font-medium text-white/80 tracking-wide">
+                            State of the Art in
+                        </span>
+                        <span class="text-5xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-ultra text-balance">
+                            IgA <br>
+                            <span class="text-accent italic font-medium">Nephropathy</span>
+                        </span>
+                    </h1>
+                    
+                    <p class="text-lg md:text-2xl text-white/70 max-w-2xl font-body leading-relaxed text-balance">
+                        De la proteinuria como biomarcador a la nueva era del bloqueo dual de receptores. El programa definitivo para liderar la precisión renal basada en la evidencia de la AUA.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                        <div class="flex items-start gap-4 text-white/90">
+                            <span class="material-symbols-outlined text-accent">biotech</span>
+                            <span class="text-xs font-semibold">Basado en la literatura de la AUA (The Journal of Urology).</span>
+                        </div>
+                        <div class="flex items-start gap-4 text-white/90">
+                            <span class="material-symbols-outlined text-accent">verified</span>
+                            <span class="text-xs font-semibold">Créditos de Formación Continuada (CFC) del SNS.</span>
+                        </div>
+                        <div class="flex items-start gap-4 text-white/90">
+                            <span class="material-symbols-outlined text-accent">person_celebrate</span>
+                            <span class="text-xs font-semibold">Sello Hipocrático: Manejo integral del paciente joven.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-6 pt-6">
+                        <a href="memoria.pdf" target="_blank" class="bg-secondary text-white border border-secondary px-8 py-4 rounded-md font-bold text-sm uppercase tracking-widest hover:brightness-110 transition-all shadow-xl flex items-center gap-3">
+                            Ver Memoria Académica
+                            <span class="material-symbols-outlined text-sm">visibility</span>
+                        </a>
+                        <a href="#programa" class="bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-4 rounded-md font-bold text-sm uppercase tracking-widest hover:bg-white/20 transition-all">
+                            Ver Currículum
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="hidden lg:flex lg:col-span-4 justify-end items-center relative">
+                    <div class="text-right flex flex-col items-end">
+                        <span class="text-[12vw] font-black text-white/5 leading-none select-none tracking-tighter">IgAN</span>
+                        <div class="mt-[-4rem] p-8 border-r-4 border-accent bg-white/5 backdrop-blur-sm max-w-xs reveal" style="transition-delay: 0.3s;">
+                            <p class="text-white font-headline italic text-xl leading-relaxed opacity-90">
+                                "La medicina de precisión no es solo una diana terapéutica; es la respuesta ética a la biografía del paciente renal."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Stats Bar -->
+        <section class="bg-surface-low border-b border-outline/10 py-12 lg:py-20">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="flex flex-col items-center text-center space-y-3 reveal">
+                        <span class="material-symbols-outlined text-primary text-4xl">assignment_turned_in</span>
+                        <div class="text-2xl font-extrabold text-primary">Self-Assessment</div>
+                        <div class="text-[10px] uppercase font-black tracking-widest text-outline">Evaluación Clínica Continua</div>
+                    </div>
+                    <div class="flex flex-col items-center text-center space-y-3 reveal" style="transition-delay: 0.1s;">
+                        <span class="material-symbols-outlined text-primary text-4xl">workspace_premium</span>
+                        <div class="text-2xl font-extrabold text-primary">Créditos CFC</div>
+                        <div class="text-[10px] uppercase font-black tracking-widest text-outline">Acreditación Nacional</div>
+                    </div>
+                    <div class="flex flex-col items-center text-center space-y-3 reveal" style="transition-delay: 0.2s;">
+                        <span class="material-symbols-outlined text-primary text-4xl">view_module</span>
+                        <div class="text-2xl font-extrabold text-primary">3 Módulos</div>
+                        <div class="text-[10px] uppercase font-black tracking-widest text-outline">Biomarcadores, Bloqueo Dual y Soporte</div>
+                    </div>
+                    <div class="flex flex-col items-center text-center space-y-3 reveal" style="transition-delay: 0.3s;">
+                        <span class="material-symbols-outlined text-primary text-4xl">calendar_month</span>
+                        <div class="text-2xl font-extrabold text-primary">8 Meses</div>
+                        <div class="text-[10px] uppercase font-black tracking-widest text-outline">Acceso a Plataforma</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Justificación -->
+        <section id="proposito" class="min-h-screen flex items-center py-32 bg-surface-lowest text-center">
+            <div class="w-full max-w-5xl mx-auto px-6 space-y-12 reveal">
+                <div class="w-16 h-1.5 bg-primary mx-auto mb-10"></div>
+                <h2 class="text-5xl md:text-6xl lg:text-7xl font-black text-primary leading-tight tracking-ultra">
+                    El Nuevo Paradigma: <br> El Bloqueo Dual de Receptores.
+                </h2>
+                <h3 class="text-2xl md:text-3xl text-secondary font-bold uppercase tracking-widest italic opacity-80 mt-6">
+                    Hacia un tratamiento dirigido para frenar la progresión a diálisis.
+                </h3>
+                <div class="text-2xl md:text-3xl text-on-surface leading-relaxed font-body font-light mt-16 bg-surface-low p-12 md:p-16 rounded-3xl border border-outline/5 shadow-sm italic text-primary/80">
+                    "En el escenario de la Nefropatía IgA, la doble inhibición sistémica plantea un horizonte clínico inédito: proteger la barrera de filtrado glomerular de forma sinérgica, optimizando la supervivencia renal y el proyecto vital del paciente."
+                </div>
+                <p class="text-sm md:text-base text-primary font-black uppercase tracking-[0.3em] pt-12">La excelencia técnica es la primera forma de caridad hipocrática.</p>
+            </div>
+        </section>
+
+        <!-- Metodología Section -->
+        <section id="metodologia" class="min-h-screen flex items-center py-32 bg-surface-lowest border-y border-outline/10">
+            <div class="w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+                <div class="space-y-12 reveal">
+                    <div>
+                        <span class="text-secondary font-black text-[11px] uppercase tracking-[0.6em] mb-4 block">Eficacia Formativa</span>
+                        <h2 class="text-5xl lg:text-6xl font-black text-primary tracking-ultra leading-tight">Metodología UX y Certificación Oficial.</h2>
+                    </div>
+                    <p class="text-xl text-on-surface/60 font-body leading-relaxed">
+                        Un entorno virtual de aprendizaje diseñado para garantizar la adquisición de competencias clínicas reales, integrando el prestigio de la AUA con la acreditación del SNS.
+                    </p>
+                    
+                    <ul class="space-y-10 pt-6">
+                        <li class="flex gap-8 group">
+                            <div class="bg-surface-low p-5 h-fit rounded-xl group-hover:bg-secondary group-hover:text-white transition-all shadow-sm">
+                                <span class="material-symbols-outlined text-3xl">school</span>
+                            </div>
+                            <div>
+                                <h4 class="text-2xl font-bold text-primary mb-3">Evaluación Formativa Continua</h4>
+                                <p class="text-base text-on-surface/50 leading-relaxed italic">Cuestionarios interactivos (Self-Assessments) con feedback razonado al instante basado en la evidencia AUA.</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-8 group">
+                            <div class="bg-surface-low p-5 h-fit rounded-xl group-hover:bg-secondary group-hover:text-white transition-all shadow-sm">
+                                <span class="material-symbols-outlined text-3xl">auto_stories</span>
+                            </div>
+                            <div>
+                                <h4 class="text-2xl font-bold text-primary mb-3">Contenidos de Clase Mundial</h4>
+                                <p class="text-base text-on-surface/50 leading-relaxed italic">Curaduría científica extraída directamente de los Journals de la American Urological Association (AUA).</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-8 group">
+                            <div class="bg-surface-low p-5 h-fit rounded-xl group-hover:bg-secondary group-hover:text-white transition-all shadow-sm">
+                                <span class="material-symbols-outlined text-3xl">verified</span>
+                            </div>
+                            <div>
+                                <h4 class="text-2xl font-bold text-primary mb-3">Acreditación SNS</h4>
+                                <p class="text-base text-on-surface/50 leading-relaxed italic">Certificado oficial con créditos de Formación Continuada (CFC) para la carrera profesional sanitaria.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="flex flex-col items-center justify-center reveal" style="transition-delay: 0.2s;">
+                    <div class="flex flex-col items-center text-center w-full max-w-lg">
+                        <!-- Logo AUA -->
+                        <img src="./logos/logo_aua.png" alt="AUA Scientific Content" class="w-full max-w-md lg:max-w-xl h-auto drop-shadow-md hover:scale-105 transition-all duration-700 rounded-xl" onerror="this.src='https://placehold.co/600x200/0055D7/ffffff?text=American+Urological+Association'">
+                        <span class="text-xs md:text-sm font-black text-outline/50 uppercase tracking-[0.3em] mt-12 italic">Respaldo Científico Exclusivo</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Itinerario Curricular -->
+        <section id="programa" class="min-h-screen py-32 bg-surface-lowest">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="mb-20 text-center reveal">
+                    <span class="text-secondary font-black text-[11px] uppercase tracking-[0.5em] mb-4 block">Estructura Académica</span>
+                    <h2 class="text-4xl md:text-6xl font-black text-primary tracking-ultra">Itinerario Curricular.</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+                    <div class="lg:col-span-4 sticky top-32 reveal">
+                        <p class="text-lg font-bold text-primary mb-6 uppercase tracking-[0.2em] italic">3 Módulos / 8 Secciones.</p>
+                        <p class="text-on-surface/50 leading-relaxed text-sm italic border-l border-outline/30 pl-6 mb-8">
+                            Cada módulo garantiza una inmersión clínica profunda a través de los 8 pilares de la metodología Hygieia Hub.
+                        </p>
+                        <div class="bg-surface-low p-8 rounded-2xl border border-outline/5">
+                            <h5 class="text-[10px] font-black uppercase tracking-stately text-secondary mb-6">Metodología Hygieia</h5>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="flex flex-col items-center text-center p-3 bg-white rounded-xl shadow-sm border border-outline/10">
+                                    <span class="material-symbols-outlined text-primary text-xl mb-2">podcasts</span>
+                                    <span class="text-[8px] font-bold uppercase tracking-widest leading-none">Exec. Brief</span>
+                                </div>
+                                <div class="flex flex-col items-center text-center p-3 bg-white rounded-xl shadow-sm border border-outline/10">
+                                    <span class="material-symbols-outlined text-primary text-xl mb-2">science</span>
+                                    <span class="text-[8px] font-bold uppercase tracking-widest leading-none">Sci. Core</span>
+                                </div>
+                                <div class="flex flex-col items-center text-center p-3 bg-white rounded-xl shadow-sm border border-outline/10">
+                                    <span class="material-symbols-outlined text-primary text-xl mb-2">forum</span>
+                                    <span class="text-[8px] font-bold uppercase tracking-widest leading-none">Debate</span>
+                                </div>
+                                <div class="flex flex-col items-center text-center p-3 bg-white rounded-xl shadow-sm border border-outline/10">
+                                    <span class="material-symbols-outlined text-primary text-xl mb-2">psychology</span>
+                                    <span class="text-[8px] font-bold uppercase tracking-widest leading-none">Cases</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-8 space-y-6 reveal">
+                        <!-- Módulo 1 -->
+                        <div class="accordion-item bg-white rounded-2xl overflow-hidden border border-outline/10 transition-all shadow-sm">
+                            <button class="w-full px-8 py-10 flex justify-between items-center text-left hover:bg-surface/50" onclick="toggleAccordion(this)">
+                                <div class="flex items-center gap-6">
+                                    <span class="text-[10px] font-black text-outline tracking-stately">MÓDULO 01</span>
+                                    <h4 class="text-2xl font-black text-primary">Biomarcadores y Estratificación del Riesgo</h4>
+                                </div>
+                                <span class="material-symbols-outlined text-secondary accordion-icon transition-transform text-3xl">expand_more</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="px-8 pb-10 grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">podcasts</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Executive Brief</h5><p class="text-[11px] text-on-surface/60">La proteinuria como subrogado de supervivencia renal.</p></div>
+                                    </div>
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">science</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Scientific Core</h5><p class="text-[11px] text-on-surface/60">Artículos de The Journal of Urology® sobre eGFR y proteinuria.</p></div>
+                                    </div>
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">forum</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Critical Debate</h5><p class="text-[11px] text-on-surface/60">Biopsia molecular vs. Biomarcadores dinámicos.</p></div>
+                                    </div>
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">open_in_new</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Further Readings</h5><p class="text-[11px] text-on-surface/60">Registros de AUA y guías de testeo actualizadas.</p></div>
+                                    </div>
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">rocket_launch</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Practice Insights</h5><p class="text-[11px] text-on-surface/60">Algoritmo clínico para estratificación del paciente de alto riesgo.</p></div>
+                                    </div>
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">psychology</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Clinical Cases</h5><p class="text-[11px] text-on-surface/60">Manejo diagnóstico en paciente con proteinuria persistente.</p></div>
+                                    </div>
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">quiz</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Self-Assessment</h5><p class="text-[11px] text-on-surface/60">Test sobre conceptos de fisiopatología molecular.</p></div>
+                                    </div>
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">smart_display</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Multimedia</h5><p class="text-[11px] text-on-surface/60">Arquitectura del glomérulo y cascada inflamatoria IgA.</p></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Módulo 2 -->
+                        <div class="accordion-item bg-white rounded-2xl overflow-hidden border border-outline/10 transition-all shadow-sm">
+                            <button class="w-full px-8 py-10 flex justify-between items-center text-left hover:bg-surface/50" onclick="toggleAccordion(this)">
+                                <div class="flex items-center gap-6">
+                                    <span class="text-[10px] font-black text-outline tracking-stately">MÓDULO 02</span>
+                                    <h4 class="text-2xl font-black text-primary">Nueva Estrategia de Tratamiento: Bloqueo Dual</h4>
+                                </div>
+                                <span class="material-symbols-outlined text-secondary accordion-icon transition-transform text-3xl">expand_more</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="px-8 pb-10 grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">podcasts</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Executive Brief</h5><p class="text-[11px] text-on-surface/60">Inhibición dual: Sinergia terapéutica en filtrado glomerular.</p></div>
+                                    </div>
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">science</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Scientific Core</h5><p class="text-[11px] text-on-surface/60">Resultados de eficacia de las nuevas terapias (Urology Practice®).</p></div>
+                                    </div>
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">forum</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Critical Debate</h5><p class="text-[11px] text-on-surface/60">Gestión de parámetros metabólicos y hematológicos.</p></div>
+                                    </div>
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">open_in_new</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Further Readings</h5><p class="text-[11px] text-on-surface/60">Consensos AUA sobre farmacología de precisión.</p></div>
+                                    </div>
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">rocket_launch</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Practice Insights</h5><p class="text-[11px] text-on-surface/60">Checklist clínico para inicio y titulación de terapias sistémicas.</p></div>
+                                    </div>
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">psychology</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Clinical Cases</h5><p class="text-[11px] text-on-surface/60">Switch terapéutico y ajuste basado en perfil analítico.</p></div>
+                                    </div>
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">quiz</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Self-Assessment</h5><p class="text-[11px] text-on-surface/60">Evaluación sobre monitorización de volemia y función hepática.</p></div>
+                                    </div>
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">smart_display</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Multimedia</h5><p class="text-[11px] text-on-surface/60">Animación 3D de modulación de vías de señalización.</p></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Módulo 3 -->
+                        <div class="accordion-item bg-white rounded-2xl overflow-hidden border border-outline/10 transition-all shadow-sm">
+                            <button class="w-full px-8 py-10 flex justify-between items-center text-left hover:bg-surface/50" onclick="toggleAccordion(this)">
+                                <div class="flex items-center gap-6">
+                                    <span class="text-[10px] font-black text-outline tracking-stately">MÓDULO 03</span>
+                                    <h4 class="text-2xl font-black text-primary">Manejo Integral y Calidad de Vida</h4>
+                                </div>
+                                <span class="material-symbols-outlined text-secondary accordion-icon transition-transform text-3xl">expand_more</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="px-8 pb-10 grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">podcasts</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Executive Brief</h5><p class="text-[11px] text-on-surface/60">El impacto del pronóstico en el proyecto vital del paciente joven.</p></div>
+                                    </div>
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">science</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Scientific Core</h5><p class="text-[11px] text-on-surface/60">Patient Reported Outcomes (PROs) en patología glomerular.</p></div>
+                                    </div>
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">forum</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Critical Debate</h5><p class="text-[11px] text-on-surface/60">Equilibrando la tecnología diagnóstica con la alianza terapéutica.</p></div>
+                                    </div>
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">open_in_new</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Further Readings</h5><p class="text-[11px] text-on-surface/60">Recursos de Medicina Narrativa y Toma de Decisiones Compartida.</p></div>
+                                    </div>
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">rocket_launch</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Practice Insights</h5><p class="text-[11px] text-on-surface/60">Herramientas de evaluación bio-psico-social en consulta.</p></div>
+                                    </div>
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">psychology</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Clinical Cases</h5><p class="text-[11px] text-on-surface/60">Gestión de la ansiedad frente al riesgo de progresión a diálisis.</p></div>
+                                    </div>
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">quiz</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Self-Assessment</h5><p class="text-[11px] text-on-surface/60">Identificación precoz de fatiga por compasión en el profesional.</p></div>
+                                    </div>
+                                    <div class="flex gap-4 items-start p-4 bg-surface/30 rounded-xl">
+                                        <span class="material-symbols-outlined text-secondary bg-white p-2 rounded-lg">smart_display</span>
+                                        <div><h5 class="text-xs font-bold text-primary uppercase mb-1">Multimedia</h5><p class="text-[11px] text-on-surface/60">Testimonios de pacientes: "Ganar años fuera de la diálisis".</p></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Público Objetivo -->
+        <section id="publico" class="min-h-screen flex items-center py-32 bg-primary text-white">
+            <div class="w-full max-w-7xl mx-auto px-6">
+                <div class="mb-24 text-center reveal">
+                    <span class="text-accent text-xs font-black uppercase tracking-[0.4em] mb-6 block">Ecosistema Hospitalario</span>
+                    <h2 class="text-5xl md:text-6xl lg:text-7xl font-black mb-8 tracking-ultra">Público Objetivo.</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                    <div class="p-10 border border-white/10 rounded-2xl space-y-8 reveal bg-white/5 hover:bg-white/10 transition-colors">
+                        <div class="flex items-center gap-6">
+                            <span class="material-symbols-outlined text-accent text-4xl md:text-5xl">nephrology</span>
+                            <h4 class="text-2xl md:text-3xl font-black">Nefrología Especializada</h4>
+                        </div>
+                        <p class="text-base text-white/60 leading-relaxed italic">Diagnóstico histológico, estratificación del riesgo e instauración de la doble inhibición de receptores.</p>
+                    </div>
+                    <div class="p-10 border border-white/10 rounded-2xl space-y-8 reveal bg-white/5 hover:bg-white/10 transition-colors" style="transition-delay: 0.1s;">
+                        <div class="flex items-center gap-6">
+                            <span class="material-symbols-outlined text-accent text-4xl md:text-5xl">urology</span>
+                            <h4 class="text-2xl md:text-3xl font-black">Especialistas en Urología</h4>
+                        </div>
+                        <p class="text-base text-white/60 leading-relaxed italic">Diagnóstico diferencial temprano (hematuria) y coordinación de cuidados en centros quirúrgicos.</p>
+                    </div>
+                    <div class="p-10 border border-white/10 rounded-2xl space-y-8 reveal bg-white/5 hover:bg-white/10 transition-colors" style="transition-delay: 0.2s;">
+                        <div class="flex items-center gap-6">
+                            <span class="material-symbols-outlined text-accent text-4xl md:text-5xl">family_home</span>
+                            <h4 class="text-2xl md:text-3xl font-black">Medicina de Familia y AP</h4>
+                        </div>
+                        <p class="text-base text-white/60 leading-relaxed italic">Cribado proactivo de proteinuria/hematuria y seguimiento compartido del paciente crónico renal.</p>
+                    </div>
+                    <div class="p-10 border border-white/10 rounded-2xl space-y-8 reveal bg-white/5 hover:bg-white/10 transition-colors" style="transition-delay: 0.3s;">
+                        <div class="flex items-center gap-6">
+                            <span class="material-symbols-outlined text-accent text-4xl md:text-5xl">school</span>
+                            <h4 class="text-2xl md:text-3xl font-black">Médicos Residentes (MIR)</h4>
+                        </div>
+                        <p class="text-base text-white/60 leading-relaxed italic">Formación troncal ineludible en las nuevas dianas moleculares y el enfoque humanista de la patología crónica.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Docentes Section -->
+        <section id="avales" class="min-h-screen flex items-center py-32 bg-on-surface text-white border-t border-white/10">
+            <div class="w-full max-w-7xl mx-auto px-6">
+                <div class="mb-24 text-center reveal">
+                    <span class="text-secondary font-black text-xs uppercase tracking-[0.8em] mb-6 block">Excelencia Académica</span>
+                    <h2 class="text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-ultra">Dirección Académica.</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-16">
+                    <div class="bg-white/5 p-12 rounded-3xl border border-white/10 shadow-sm reveal hover:bg-white/10 transition-all">
+                        <span class="text-[10px] md:text-xs font-black text-secondary tracking-widest uppercase mb-6 block italic">Editor en Jefe y Módulo 2</span>
+                        <h4 class="text-3xl font-black text-white mb-4">Dr. Manuel Praga Terente</h4>
+                        <p class="text-sm md:text-base font-bold text-white/60 leading-relaxed">Jefe de Sección Nefrología (Emérito). Hospital Univ. 12 de Octubre. Investigador Principal (Protección Glomerular).</p>
+                    </div>
+                    <div class="bg-white/5 p-12 rounded-3xl border border-white/10 shadow-sm reveal hover:bg-white/10 transition-all" style="transition-delay: 0.1s;">
+                        <span class="text-[10px] md:text-xs font-black text-secondary tracking-widest uppercase mb-6 block italic">Editor Módulo 1</span>
+                        <h4 class="text-3xl font-black text-white mb-4">Dr. Eduardo Gutiérrez</h4>
+                        <p class="text-sm md:text-base font-bold text-white/60 leading-relaxed">Unidad de Enf. Glomerulares. Hospital Univ. 12 de Octubre. Experto en Biomarcadores Dinámicos.</p>
+                    </div>
+                    <div class="bg-white/5 p-12 rounded-3xl border border-white/10 shadow-sm reveal hover:bg-white/10 transition-all" style="transition-delay: 0.2s;">
+                        <span class="text-[10px] md:text-xs font-black text-secondary tracking-widest uppercase mb-6 block italic">Editora Módulo 3</span>
+                        <h4 class="text-3xl font-black text-white mb-4">Dra. Montserrat Díaz</h4>
+                        <p class="text-sm md:text-base font-bold text-white/60 leading-relaxed">Jefa de Sección de Nefrología. Fundació Puigvert. Referente en Patient Reported Outcomes (PROs).</p>
+                    </div>
+                </div>
+
+                <!-- Logos S.E.N y CFC -->
+                <div class="mt-20 pt-12 border-t border-white/10 flex flex-row justify-center items-center gap-12 md:gap-24 lg:gap-32 reveal w-full overflow-hidden">
+                    <img src="./logos/logo_sen.png" alt="Logo S.E.N." class="h-16 md:h-24 lg:h-28 w-auto object-contain drop-shadow-sm hover:scale-105 transition-transform rounded-lg" onerror="this.src='https://placehold.co/300x120/ffffff/0055D7?text=S.E.N.'">
+                    <img src="./logos/logo_cfc.PNG" alt="Logo CFC" class="h-16 md:h-24 lg:h-28 w-auto object-contain drop-shadow-sm hover:scale-105 transition-transform rounded-lg" onerror="this.src='https://placehold.co/300x120/ffffff/00B5DA?text=CFC+SNS'">
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Identity Section -->
+        <section class="hero-gradient relative min-h-screen flex items-center overflow-hidden border-t border-white/10">
+            <div class="absolute inset-0 bg-white/5 rounded-full filter blur-[120px] transform scale-150 -z-10 translate-x-1/3 translate-y-1/4"></div>
+
+            <div class="max-w-7xl mx-auto px-6 relative z-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-center text-white">
+                
+                <div class="flex flex-col items-start text-left space-y-10 reveal">
+                    <h2 class="flex flex-col gap-4">
+                        <span class="text-4xl md:text-5xl lg:text-7xl font-black text-white leading-[1.05] tracking-ultra text-balance">
+                            Hacia una <br>
+                            Interpretación Holística <br>
+                            <span class="text-accent italic font-medium">del Paciente.</span>
+                        </span>
+                    </h2>
+                    
+                    <p class="text-lg md:text-2xl text-white/70 max-w-2xl font-body leading-relaxed text-balance">
+                        Nuestra propuesta educativa expande el horizonte molecular y sistémico para integrar el cuidado biográfico. Transformamos la innovación farmacológica en un acto de acompañamiento y excelencia clínica real.
+                    </p>
+                </div>
+
+                <!-- Parte Derecha: Logo Hygieia Gigante -->
+                <div class="flex flex-col items-center justify-center h-full w-full relative reveal" style="transition-delay: 0.3s;">
+                    <img src="./logos/logo_hygeia.png" alt="Hygieia Learning Hub" class="w-full max-w-sm md:max-w-lg lg:max-w-2xl h-auto drop-shadow-2xl transition-all" onerror="this.src='https://placehold.co/800x250/0055D7/ffffff?text=Hygieia+Learning+Hub'">
+                </div>
+                
+            </div>
+        </section>   
+    </main>
+
+    <!-- Footer Institucional -->
+    <footer class="py-8 md:py-12 bg-surface text-primary border-t border-outline/10">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-center md:text-left">
+                <img src="./logos/logo_hygeia.png" alt="Hygieia Hub" class="h-20 lg:h-28 w-auto" onerror="this.src='https://placehold.co/400x100/ffffff/0055D7?text=Hygieia'">
+                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-outline leading-relaxed md:border-l md:border-outline/20 md:pl-8">
+                    © 2026 — Madrid / Barcelona <br>
+                    Contacto: <a href="mailto:d.fernandez@hygeia.network" class="text-secondary lowercase tracking-normal">d.fernandez@hygeia.network</a>
+                </p>
+            </div>
+            <div class="flex gap-8 text-[10px] font-black uppercase tracking-stately text-primary/60">
+                <a href="#" onclick="openModal('modal-aviso'); return false;" class="hover:text-secondary transition-colors">Aviso Legal</a>
+                <a href="#" onclick="openModal('modal-privacidad'); return false;" class="hover:text-secondary transition-colors">Privacidad</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modales -->
+    <div id="modal-aviso" class="modal fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-primary/90 backdrop-blur-sm cursor-pointer" onclick="closeModal('modal-aviso')"></div>
+        <div class="bg-surface relative z-10 w-full max-w-3xl max-h-[85vh] rounded-2xl shadow-2xl flex flex-col mx-4 overflow-hidden border border-outline/20">
+            <div class="flex justify-between items-center p-6 border-b border-outline/10 bg-white">
+                <h2 class="text-xl font-bold text-primary font-headline">Aviso Legal</h2>
+                <button onclick="closeModal('modal-aviso')" class="text-outline hover:text-secondary transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="p-8 overflow-y-auto font-body text-sm text-on-surface/80 space-y-6">
+                <div class="prose prose-sm max-w-none prose-headings:text-primary prose-a:text-secondary">
+                    <p class="font-bold text-primary">Información General</p>
+                    <p>En cumplimiento de lo dispuesto en la Ley 34/2002, de 11 de julio, de servicios de la sociedad de la información y de comercio electrónico (LSSI-CE), se informa de que el presente sitio web tiene carácter corporativo, institucional y estrictamente informativo.</p>
+                    
+                    <p class="font-bold text-primary mt-6">Titular del Sitio</p>
+                    <p>HYGEIA LEARNING HUB, SL</p>
+                    <p>NIF/CIF: B26580704</p>
+                    <p>Domicilio social: C\ Capitan Arenas 22 1-3 08034 Barcelona</p>
+                    <p>Correo electrónico de contacto: info@hygeia.network</p>
+
+                    <p>El acceso, la navegación y el uso del sitio web atribuyen la condición de usuario e implican la aceptación plena del presente Aviso legal.</p>
+
+                    <p class="font-bold text-primary mt-6">Finalidad del sitio</p>
+                    <p>Este sitio web tiene como finalidad ofrecer información sobre la actividad de HG en el marco del desarrollo, impulso y comunicación de proyectos formativos de alto nivel, concebidos en colaboración con fundaciones, instituciones y otras entidades que aportan valor docente, académico e institucional, con una finalidad estrictamente informativa y no vinculante.</p>
+
+                    <p class="font-bold text-primary mt-6">Uso de los contenidos</p>
+                    <p>El usuario se compromete a realizar un uso adecuado, responsable y respetuoso de los contenidos del sitio web, de conformidad con la legislación vigente, la buena fe y los principios generales de convivencia digital.</p>
+                    
+                    <p class="font-bold text-primary mt-6">Propiedad intelectual y créditos de imagen</p>
+                    <p>Todos los contenidos del sitio web —incluidos textos, documentos, imágenes, elementos gráficos, diseño y estructura— son titularidad de HG o se utilizan bajo las correspondientes licencias.</p>
+                    
+                    <p>HG vela activamente por el respeto de los derechos de autoría y licencia. Algunas imágenes pueden estar sujetas a licencias Creative Commons u otras similares y se encuentran debidamente acreditadas en la página de Atribuciones, accesible desde el pie de página del sitio web.</p>
+
+                    <p class="font-bold text-primary mt-6">Responsabilidad</p>
+                    <p>HG no se hace responsable de los daños y perjuicios derivados del uso de la información contenida en este sitio web, ni de posibles errores, omisiones o contenidos desactualizados.</p>
+
+                    <p class="font-bold text-primary mt-6">Legislación aplicable</p>
+                    <p>El presente Aviso legal se rige por la legislación española vigente.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-privacidad" class="modal fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-primary/90 backdrop-blur-sm cursor-pointer" onclick="closeModal('modal-privacidad')"></div>
+        <div class="bg-surface relative z-10 w-full max-w-3xl max-h-[85vh] rounded-2xl shadow-2xl flex flex-col mx-4 overflow-hidden border border-outline/20">
+            <div class="flex justify-between items-center p-6 border-b border-outline/10 bg-white">
+                <h2 class="text-xl font-bold text-primary font-headline">Política de Privacidad Institucional</h2>
+                <button onclick="closeModal('modal-privacidad')" class="text-outline hover:text-secondary transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="p-8 overflow-y-auto font-body text-sm text-on-surface/80 space-y-6">
+                <div class="prose prose-sm max-w-none prose-headings:text-primary prose-a:text-secondary">
+                    <p class="font-bold text-primary">Información General</p>
+                    <p>HLH vela por la protección de la privacidad y por el tratamiento responsable de los datos personales, de conformidad con el Reglamento (UE) 2016/679 (RGPD) y la normativa vigente en materia de protección de datos.</p>
+
+                    <p class="font-bold text-primary mt-6">Titular del Sitio</p>
+                    <p>HYGEIA LEARNING HUB, SL</p>
+                    <p>NIF/CIF: B26580704</p>
+                    <p>Domicilio social: C\ Capitan Arenas 22 1-3 08034 Barcelona</p>
+                    <p>Correo electrónico de contacto: info@hygeia.network</p>
+
+                    <p class="font-bold text-primary mt-6">Datos personales</p>
+                    <p>Este sitio web puede recoger datos personales exclusivamente a través de formularios de contacto o mediante comunicaciones electrónicas iniciadas voluntariamente por el usuario. Los datos recogidos son los estrictamente necesarios para atender consultas de carácter institucional o profesional.</p>
+
+                    <p class="font-bold text-primary mt-6">Finalidad del tratamiento</p>
+                    <p>Los datos personales se tratan únicamente para atender comunicaciones, facilitar información relacionada con las actividades y proyectos impulsados por HG y garantizar una relación institucional adecuada. En ningún caso se utilizarán con fines comerciales o publicitarios.</p>
+                    
+                    <p class="font-bold text-primary mt-6">Base legal</p>
+                    <p>La base legal del tratamiento es el consentimiento del usuario y, en su caso, el cumplimiento de obligaciones legales.</p>
+                    
+                    <p class="font-bold text-primary mt-6">Conservación de los datos</p>
+                    <p>Los datos personales se conservarán durante el tiempo estrictamente necesario para cumplir la finalidad para la que fueron recabados.</p>
+
+                    <p class="font-bold text-primary mt-6">Destinatarios</p>
+                    <p>Los datos no serán cedidos a terceros, salvo obligación legal.</p>
+                    
+                    <p class="font-bold text-primary mt-6">Derechos del Usuario</p>
+                    <p>El usuario puede ejercer los derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad mediante comunicación escrita dirigida al responsable del tratamiento.</p>
+
+                    <p class="font-bold text-primary mt-6">Medidas de seguridad</p>
+                    <p>HG aplica las medidas técnicas y organizativas adecuadas para garantizar la seguridad, integridad y confidencialidad de los datos personales.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+        function toggleAccordion(button) {
+            const item = button.parentElement;
+            const content = item.querySelector('.accordion-content');
+            const isActive = item.classList.contains('active');
+
+            document.querySelectorAll('.accordion-item').forEach(other => {
+                other.classList.remove('active');
+                other.querySelector('.accordion-content').style.maxHeight = null;
+            });
+
+            if (!isActive) {
+                item.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        }
+
+        // Funciones para manejar los modales
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if(modal) {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = 'hidden'; // Previene el scroll del fondo
+            }
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if(modal) {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = 'auto'; // Restaura el scroll
+            }
+        }
+    </script>
+
+    <!-- Script de n8n Chat Personalizado -->
+    <script type="module">
+      import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+      createChat({
+        webhookUrl: 'https://n8n.asklepiosdat.com/webhook/edfb4e9b-1e66-4b06-975e-b200f5213782/chat',
+        initialMessages: [
+            '¡Hola! Soy el Asesor Académico de Hygieia Hub.',
+            '¿En qué puedo ayudarte hoy sobre el nuevo programa State of the Art in IgA Nephropathy?'
+        ],
+        i18n: {
+            en: {
+                title: 'Hygieia Hub', 
+                subtitle: 'Asesoría Académica Institucional',
+                getStarted: 'Nueva conversación', 
+                chatInput: { 
+                    placeholder: 'Escribe tu consulta aquí...' 
+                }
+            }
+        }
+      });
+    </script>
+</body>
+</html>
